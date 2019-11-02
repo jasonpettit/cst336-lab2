@@ -115,6 +115,11 @@
                         wrongAnswer(5);
                     }
 
+                    if(score < 80) {
+                        $("#totalScore").attr("class", "text-danger");
+                    }else {
+                        $("#totalScore").attr("class", "text-success");
+                    }
                     
                     $("#totalScore").html(`Total Score: ${score}`);
                     $("totalAttempts").html(`Total Attempts: ${++attempts}`);
