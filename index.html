@@ -11,7 +11,7 @@
             $(document).ready(function(){
                 
                 //global variables
-                var score = 0;
+                var score = 0.0;
                 var attempts = localStorage.getItem("total_attempts");
                 
                 //event Listeners
@@ -45,6 +45,10 @@
                         isValid = false;
                         $("#validationFdbk").html("Question 1 was not answered");
                     }
+                    else if($("#q8").val() =="") {
+                        isValid = false;
+                        $("#validationFdbk").html("Question 8 was not answered");
+                    }
                     return isValid;
                 }
                 
@@ -59,7 +63,7 @@
                         $(`#q${index}Feedback`).html("Correct!");
                         $(`#q${index}Feedback`).attr("class", "bg-success text-white");
                         $(`#markImg${index}`).html("<img src='img/checkmark.png' alt='checkmark'>");
-                        score += 20;
+                        score += 12.5;
                     }
                     
                     function wrongAnswer(index){
@@ -73,6 +77,9 @@
                     let q1Response = $("#q1").val().toLowerCase();
                     let q2Response = $("#q2").val();
                     let q4Response = $("input[name=q4]:checked").val();
+                    let q6Response = $("input[name=q6]:checked").val();
+                    let q7Response = $("#q7").val();
+                    let q8Response = $("#q8").val().toLowerCase();
                     
                     //Question 1
                     if (q1Response == "sacramento"){
@@ -115,6 +122,30 @@
                         wrongAnswer(5);
                     }
 
+                    //Question 6
+                    if (q6Response == "Washington"){
+                            rightAnswer(6);
+                        }
+                        else {
+                            wrongAnswer(6);
+                        }
+
+                    //Question 7
+                    if (q7Response == "ny"){
+                        rightAnswer(7);
+                    }
+                    else {
+                        wrongAnswer(7);
+                    }
+
+                    //Question 8
+                    if (q8Response == "boise"){
+                        rightAnswer(8);
+                    }
+                    else {
+                        wrongAnswer(8);
+                    }
+
                     if(score < 80) {
                         $("#totalScore").attr("class", "text-danger");
                     }else {
@@ -122,7 +153,7 @@
                     }
                     
                     $("#totalScore").html(`Total Score: ${score}`);
-                    $("totalAttempts").html(`Total Attempts: ${++attempts}`);
+                    $("#totalAttempts").html(`Total Attempts: ${++attempts}`);
                     localStorage.setItem("total_attempts", attempts);
                 }
             })//ready
@@ -171,8 +202,35 @@
         <div id="q5Feedback"></div>
         <br/><br/>
         
+        <h3><span id="markImg6"></span>Which national monument is an obelisk?</h3>
+            <input type="radio" name="q6" id="qw" value="Washington"><label for="wa"> Washington</label>
+            <input type="radio" name="q6" id="tj" value="Jefferson"><label for="Jefferson"> Jefferson</label>
+            <input type="radio" name="q6" id="al" value="Lincoln"><label for="Lincoln"> Lincoln</label>
+        <br/><br/>
+        <div id="q6Feedback"></div>
+        <br/>
+        
+        <h3><span id="markImg7"></span>Where was the World Trade Center located?</h3>
+        <select id="q7">
+            <option value="">Select One</option>
+            <option value="ny">New York</option>
+            <option value="dc">Washington D.C.</option>
+            <option value="sf">San Francisco</option>
+            <option value="lo">London</option>
+        </select>
+        <br/><br/>
+        <div id="q7Feedback"></div>
+        <br/>
+        
+        <h3><span id="markImg8"></span>What is the capital of Idaho?</h3>
+        <input type="text" id="q8">
+        <br/><br/>
+        <div id="q8Feedback"></div>
+        <br/><br/>
+        
         <h3 id="validationFdbk" class="bg-danger text-white"></h3>
         <button class="btn btn-secondary btn-lg btn-block">Submit Quiz</button>
+        <br/>
         <h2 id="totalScore" class="text-info"></h2>
         
         <h3 id="totalAttempts"></h3>
