@@ -148,8 +148,11 @@
 
                     if(score < 80) {
                         $("#totalScore").attr("class", "text-danger");
+                        $("#congratulations").html(``);                        
                     }else {
                         $("#totalScore").attr("class", "text-success");
+                        $("#congratulations").attr("class", "text-success");
+                        $("#congratulations").html(`Congratulations your score is great!`);
                     }
                     
                     $("#totalScore").html(`Total Score: ${score}`);
@@ -232,7 +235,7 @@
         <button class="btn btn-secondary btn-lg btn-block">Submit Quiz</button>
         <br/>
         <h2 id="totalScore" class="text-info"></h2>
-        
+        <h3 id="congratulations"></h3>        
         <h3 id="totalAttempts"></h3>
     </body>
 </html>
